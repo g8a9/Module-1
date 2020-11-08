@@ -179,8 +179,12 @@ class FunctionBase:
             (see `is_constant` to remove unneeded variables)
 
         """
-        # TODO: Implement for Task 1.3.
-        raise NotImplementedError('Need to implement for Task 1.3')
+        derivatives = cls.backward(ctx, d_output)
+        local_gradient = list()
+        for local_input, local_derivative in zip(inputs, derivatives):
+            if not is_constant(local_input):
+                local_gradient.append(VariableWithDeriv(local_input, local_derivative))
+        return local_gradient
 
 
 def is_leaf(val):
@@ -203,4 +207,5 @@ def backpropagate(final_variable_with_deriv):
            and its derivative that we want to propagate backward to the leaves.
     """
     # TODO: Implement for Task 1.4.
-    raise NotImplementedError('Need to implement for Task 1.4')
+    raise NotImplementedError("Need to implement for Task 1.4")
+
